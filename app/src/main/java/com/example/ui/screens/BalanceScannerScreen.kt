@@ -281,7 +281,7 @@ fun BalanceScannerScreen(viewModel: WalletRecoveryViewModel) {
                             }
                         }
 
-                        Divider(color = CryptoBorderDark)
+                        HorizontalDivider(color = CryptoBorderDark)
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),

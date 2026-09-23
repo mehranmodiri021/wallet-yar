@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.FactCheck
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -170,7 +171,7 @@ fun SeedValidatorScreen(viewModel: WalletRecoveryViewModel) {
                 ),
                 shape = RoundedCornerShape(10.dp)
             ) {
-                Icon(Icons.Default.FactCheck, contentDescription = null)
+                Icon(Icons.AutoMirrored.Filled.FactCheck, contentDescription = null)
                 Spacer(Modifier.width(8.dp))
                 Text(
                     text = "اعتبارسنجی دیکشنری و چک‌سام عبارت ($wordCount کلمه)",

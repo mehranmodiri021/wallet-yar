@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.FactCheck
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -176,7 +178,7 @@ fun DashboardScreen(
                 QuickToolItem(
                     title = "اعتبارسنجی عبارات ۱۲ و ۲۴ کلمه‌ای (Seed Validator)",
                     description = "بررسی زنده ۲۰۴۸ کلمه دیکشنری و چک‌سام SHA-256",
-                    icon = Icons.Default.FactCheck,
+                    icon = Icons.AutoMirrored.Filled.FactCheck,
                     color = CyanPrimary,
                     onClick = { onNavigate(1) } // Seed Validator
                 )
@@ -208,7 +210,7 @@ fun DashboardScreen(
                 QuickToolItem(
                     title = "راهنمای گام‌به‌گام بازیابی ولت‌ها (Recovery Guides)",
                     description = "آموزش متامسک، تراست ولت، لجر، فانتوم و اکسودوس",
-                    icon = Icons.Default.MenuBook,
+                    icon = Icons.AutoMirrored.Filled.MenuBook,
                     color = Color(0xFFFFB74D),
                     onClick = { onNavigate(6) } // Guides
                 )

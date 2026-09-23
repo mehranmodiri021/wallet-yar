@@ -502,7 +502,7 @@ class WalletRecoveryViewModel(application: Application) : AndroidViewModel(appli
             scanResult.value = result
 
             // 4. Save to Room scan_history cache
-            if (result != null) {
+            if (result.address.isNotBlank()) {
                 scanHistoryDao.insertScan(
                     ScanHistoryEntity(
                         address = result.address,

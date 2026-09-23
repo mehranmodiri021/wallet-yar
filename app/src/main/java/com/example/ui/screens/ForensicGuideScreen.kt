@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -109,7 +110,7 @@ fun ForensicGuideScreen() {
                                 .background(CyanPrimary.copy(alpha = 0.2f), CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(Icons.Default.MenuBook, contentDescription = null, tint = CyanPrimary, modifier = Modifier.size(20.dp))
+                            Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = null, tint = CyanPrimary, modifier = Modifier.size(20.dp))
                         }
                         Spacer(Modifier.width(10.dp))
                         Column {
