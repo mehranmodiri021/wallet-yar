@@ -15,9 +15,9 @@
 .cxx
 local.properties
 .env
-debug.keystore
 *.jks
 *.keystore
+!debug.keystore
 
 # Ensure Gradle Wrapper is always tracked
 !gradlew
