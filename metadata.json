@@ -1,0 +1,6 @@
+{
+  "name": "کیف پول یار",
+  "description": "جعبه‌ابزار اخلاقی، آموزشی و امنیتی برای کمک به قربانیان گم‌شدن کیف پول رمزارز و بازیابی کلمات مفقود BIP-39",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

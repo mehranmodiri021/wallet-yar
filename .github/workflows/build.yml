@@ -1,0 +1,48 @@
+name: Android CI/CD Build (Wallet Yar)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test Wallet Yar (APK & AAB)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant Execute Permission to Gradle
+        run: chmod +x gradlew || true
+
+      - name: Run Unit Tests
+        run: gradle testDebugUnitTest --no-daemon
+
+      - name: Build Debug APK
+        run: gradle assembleDebug --no-daemon
+
+      - name: Build Release Bundle (AAB)
+        run: gradle bundleRelease --no-daemon
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wallet-yar-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+
+      - name: Upload Release AAB Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wallet-yar-release-bundle
+          path: app/build/outputs/bundle/release/*.aab
