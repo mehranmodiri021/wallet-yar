@@ -13,39 +13,77 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+          java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
 
-      - name: Grant Execute Permission to Gradle Wrapper
-        run: chmod +x gradlew || true
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-      - name: Run Unit Tests
-        run: ./gradlew :app:testDebugUnitTest --no-daemon
+      - name: Setup Keystore for Release Build
+        run: |
+          if [ ! -f "my-upload-key.jks" ] && [ -z "$KEYSTORE_PATH" ]; then
+            echo "Generating build keystore for release artifact packaging..."
+            keytool -genkeypair -v -keystore my-upload-key.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=WalletYar, OU=Mobile, O=WalletYar, L=Tehran, S=Tehran, C=IR"
+            echo "STORE_PASSWORD=android" >> $GITHUB_ENV
+            echo "KEY_PASSWORD=android" >> $GITHUB_ENV
+            echo "KEYSTORE_PATH=${GITHUB_WORKSPACE}/my-upload-key.jks" >> $GITHUB_ENV
+          fi
+
+      - name: Run unit tests
+        run: ./gradlew :app:testDebugUnitTest --no-daemon --stacktrace
 
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
 
-      - name: Build Release Bundle (AAB)
-        run: ./gradlew :app:bundleRelease --no-daemon
+      - name: Build Release APK
+        run: ./gradlew :app:assembleRelease --no-daemon --stacktrace
 
-      - name: Upload Debug APK Artifact
+      - name: Build Release AAB
+        run: ./gradlew :app:bundleRelease --no-daemon --stacktrace
+
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: wallet-yar-debug-apk
           path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: warn
 
-      - name: Upload Release AAB Artifact
+      - name: Upload Release APK
         uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: wallet-yar-release-bundle
+          name: wallet-yar-release-apk
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: warn
+
+      - name: Upload Release AAB
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wallet-yar-release-aab
           path: app/build/outputs/bundle/release/*.aab
+          if-no-files-found: warn
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: app/build/reports/tests/
