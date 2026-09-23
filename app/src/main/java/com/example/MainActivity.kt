@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.FactCheck
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -147,7 +149,7 @@ fun MainAppScreen(
                         viewModel.setTab(0)
                         coroutineScope.launch { drawerState.close() }
                     }
-                    DrawerNavRow("اعتبارسنجی عبارات (Seed)", Icons.Default.FactCheck, currentTab == 1) {
+                    DrawerNavRow("اعتبارسنجی عبارات (Seed)", Icons.AutoMirrored.Filled.FactCheck, currentTab == 1) {
                         viewModel.setTab(1)
                         coroutineScope.launch { drawerState.close() }
                     }
@@ -167,7 +169,7 @@ fun MainAppScreen(
                         viewModel.setTab(5)
                         coroutineScope.launch { drawerState.close() }
                     }
-                    DrawerNavRow("راهنمای گام‌به‌گام کیف‌پول‌ها", Icons.Default.MenuBook, currentTab == 6) {
+                    DrawerNavRow("راهنمای گام‌به‌گام کیف‌پول‌ها", Icons.AutoMirrored.Filled.MenuBook, currentTab == 6) {
                         viewModel.setTab(6)
                         coroutineScope.launch { drawerState.close() }
                     }
@@ -305,7 +307,7 @@ fun MainAppScreen(
                             viewModel.setTab(1)
                             if (!isVip && (0..3).random() == 0) showInterstitialAd = true
                         },
-                        icon = { Icon(Icons.Default.FactCheck, contentDescription = "اعتبارسنجی") },
+                        icon = { Icon(Icons.AutoMirrored.Filled.FactCheck, contentDescription = "اعتبارسنجی") },
                         label = { Text("اعتبارسنجی", fontSize = 10.sp) },
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = Color(0xFF003038),

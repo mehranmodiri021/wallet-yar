@@ -36,7 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "crypto_recovery_db"
-                ).fallbackToDestructiveMigration()
+                ).fallbackToDestructiveMigration(dropAllTables = true)
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

@@ -14,41 +14,41 @@ import java.util.concurrent.TimeUnit
 // Blockchair API Response Models
 @JsonClass(generateAdapter = true)
 data class BlockchairBtcResponse(
-    @Json(name = "data") val data: Map<String, BlockchairBtcData>?,
-    @Json(name = "context") val context: BlockchairContext?
+    @param:Json(name = "data") val data: Map<String, BlockchairBtcData>?,
+    @param:Json(name = "context") val context: BlockchairContext?
 )
 
 @JsonClass(generateAdapter = true)
 data class BlockchairBtcData(
-    @Json(name = "address") val address: BlockchairAddressDetails?
+    @param:Json(name = "address") val address: BlockchairAddressDetails?
 )
 
 @JsonClass(generateAdapter = true)
 data class BlockchairEthResponse(
-    @Json(name = "data") val data: Map<String, BlockchairEthData>?,
-    @Json(name = "context") val context: BlockchairContext?
+    @param:Json(name = "data") val data: Map<String, BlockchairEthData>?,
+    @param:Json(name = "context") val context: BlockchairContext?
 )
 
 @JsonClass(generateAdapter = true)
 data class BlockchairEthData(
-    @Json(name = "address") val address: BlockchairAddressDetails?
+    @param:Json(name = "address") val address: BlockchairAddressDetails?
 )
 
 @JsonClass(generateAdapter = true)
 data class BlockchairAddressDetails(
-    @Json(name = "type") val type: String?,
-    @Json(name = "balance") val balance: Double?,
-    @Json(name = "balance_usd") val balanceUsd: Double?,
-    @Json(name = "received") val received: Double?,
-    @Json(name = "transaction_count") val transactionCount: Int?,
-    @Json(name = "first_seen_receiving") val firstSeen: String?,
-    @Json(name = "last_seen_receiving") val lastSeen: String?
+    @param:Json(name = "type") val type: String?,
+    @param:Json(name = "balance") val balance: Double?,
+    @param:Json(name = "balance_usd") val balanceUsd: Double?,
+    @param:Json(name = "received") val received: Double?,
+    @param:Json(name = "transaction_count") val transactionCount: Int?,
+    @param:Json(name = "first_seen_receiving") val firstSeen: String?,
+    @param:Json(name = "last_seen_receiving") val lastSeen: String?
 )
 
 @JsonClass(generateAdapter = true)
 data class BlockchairContext(
-    @Json(name = "code") val code: Int?,
-    @Json(name = "market_price_usd") val marketPriceUsd: Double?
+    @param:Json(name = "code") val code: Int?,
+    @param:Json(name = "market_price_usd") val marketPriceUsd: Double?
 )
 
 interface BlockchairApiService {
